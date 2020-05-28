@@ -1,0 +1,7 @@
+*.bin
+*.zip
+model.json
+metadata.json
+dist/
+.cache/
+node_modules/

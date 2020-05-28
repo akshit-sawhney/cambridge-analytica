@@ -1,0 +1,70 @@
+<!doctype html>
+
+<head>
+  <title>Hackathon</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    #review-text {
+      font-size: 120%;
+      width: 60%;
+      height: 200px;
+    }
+
+    select {
+      display: block;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tfjs-example-container centered-container">
+    <section class='title-area'>
+      <h1>Hackathon</h1>
+    </section>
+
+
+
+    <section>
+      <p class='section-head'>Load Model</p>
+
+      <div class="create-model">
+        <button id="load-pretrained-remote" style="display:none">Load hosted pretrained model</button>
+        <button id="load-pretrained-local" style="display:none">Load local pretrained model</button>
+      </div>
+
+      <div>
+        <div>
+          <span>Model type: </span>
+          <span id="modelType"></span>
+        </div>
+        <div>
+          <span>Vocabulary size: </span>
+          <span id="vocabularySize"></span>
+        </div>
+        <div>
+          <span>Max length: </span>
+          <span id="maxLen"></span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <textarea id="review-text"></textarea>
+    </section>
+
+    <section>
+      <p class='section-head'>Status</p>
+      <span id="status">Standing by.</span>
+    </section>
+
+  </div>
+
+
+
+
+  <script src='index.js'></script>
+</body>
