@@ -10,11 +10,6 @@ const HOSTED_URLS = {
       'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json'
 };
 
-const LOCAL_URLS = {
-  model: './resources/model.json',
-  metadata: './resources/metadata.json'
-};
-
 class SentimentPredictor {
   async init(urls) {
     this.urls = urls;
@@ -34,7 +29,6 @@ class SentimentPredictor {
 
     this.wordIndex = sentimentMetadata['word_index'];
     this.vocabularySize = sentimentMetadata['vocabulary_size'];
-    console.log('vocabularySize = ', this.vocabularySize);
   }
 
   predict(text) {
@@ -50,24 +44,19 @@ class SentimentPredictor {
     const paddedSequence = padSequences([sequence], this.maxLen);
     const input = tf.tensor2d(paddedSequence, [1, this.maxLen]);
 
-    const beginMs = performance.now();
     const predictOut = this.model.predict(input);
     const score = predictOut.dataSync()[0];
     predictOut.dispose();
-    const endMs = performance.now();
 
-    return {score: score, elapsed: (endMs - beginMs)};
+    return {score: score};
   }
 };
 
 async function setupSentiment() {
   if (await loader.urlExists(HOSTED_URLS.model)) {
     ui.status('Model available: ' + HOSTED_URLS.model);
-    const button = document.getElementById('load-pretrained-remote');
-    button.addEventListener('click', async () => {
-      const predictor = await new SentimentPredictor().init(HOSTED_URLS);
-      ui.prepUI(x => predictor.predict(x));
-    });
+    const predictor = await new SentimentPredictor().init(HOSTED_URLS);
+    ui.prepUI(x => predictor.predict(x));
     button.style.display = 'inline-block';
   }
 

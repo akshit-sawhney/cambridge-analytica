@@ -16,7 +16,6 @@ export async function loadHostedPretrainedModel(url) {
   try {
     const model = await tf.loadLayersModel(url);
     ui.status('Done loading pretrained model.');
-    ui.disableLoadModelButtons();
     return model;
   } catch (err) {
     console.error(err);
